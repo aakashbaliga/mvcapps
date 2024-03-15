@@ -34,6 +34,22 @@ abstract class Cell extends Publisher implements Serializable {
         }
     }
 
+    // Anson Lau
+    // Set neighbors of the cell
+    public void setNeighbors(Set<Cell> neighbors) {
+        this.neighbors = neighbors;
+    }
+
+    // Get the row of the cell
+    public int getRow() {
+        return row;
+    }
+
+    // Get the column of the cell
+    public int getCol() {
+        return col;
+    }
+
     // observer neighbors' states
     public abstract void observe();
     // interact with a random neighbor
@@ -44,5 +60,6 @@ abstract class Cell extends Publisher implements Serializable {
     public abstract void nextState();
     // set status to a random or initial value
     public abstract void reset(boolean randomly);
-
+    // Set status of the cell
+    public abstract void setStatus(int status);
 }

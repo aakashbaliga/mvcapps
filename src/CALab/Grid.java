@@ -3,6 +3,7 @@ package CALab;
 import java.awt.*;
 import java.util.*;
 import java.io.*;
+import java.lang.*;
 import mvc.*;
 
 public abstract class Grid extends Model {
@@ -23,22 +24,37 @@ public abstract class Grid extends Model {
     }
     public Grid() { this(20); }
 
+    // Anson Lau
     protected void populate() {
-        // 1. use makeCell to fill in cells
-        // 2. use getNeighbors to set the neighbors field of each cell
+        for (int row = 0; row < dim; row++) {
+            for (int col = 0; col < dim; col++) {
+                cells[row][col] = makeCell(true); // Use makeCell to fill in cells
+            }
+        }
+        for (int row = 0; row < dim; row++) {
+            for (int col = 0; col < dim; col++) {
+                cells[row][col].setNeighbors(getNeighbors(cells[row][col], 1));
+                // Use getNeighbors to set the neighbors field of each cell
+            }
+        }
     }
 
+    // Anson Lau
     // called when Populate button is clicked
     public void repopulate(boolean randomly) {
-        if (randomly) {
-            // randomly set the status of each cell
-        } else {
-            // set the status of each cell to 0 (dead)
+        for (int row = 0; row < dim; row++) {
+            for (int col = 0; col < dim; col++) {
+                if (randomly) {
+                    cells[row][col].setStatus(Math.random() < 0.5 ? 0 : 1); // Randomly set the status of each cell
+                } else {
+                    cells[row][col].setStatus(0); // Set the status of each cell to 0 (dead)
+                }
+            }
         }
-        // notify subscribers
+        notifySubscribers(); // notify subscribers
     }
 
-
+    // Anson Lau
     public Set<Cell> getNeighbors(Cell asker, int radius) {
         /*
         return the set of all cells that can be reached from the asker in radius steps.
@@ -46,6 +62,17 @@ public abstract class Grid extends Model {
         Tricky part: cells in row/col 0 or dim - 1.
         The asker is not a neighbor of itself.
         */
+
+        Set<Cell> neighbors = new HashSet<>();
+
+        for (int row = Math.max(0, asker.getRow() - radius); row <= Math.min(dim - 1, asker.getRow() + radius); row++) {
+            for (int col = Math.max(0, asker.getCol() - radius); col <= Math.min(dim - 1, asker.getCol() + radius); col++) {
+                if (!(row == asker.getRow() && col == asker.getCol())) {
+                    neighbors.add(cells[row][col]);
+                }
+            }
+        }
+        return neighbors;
     }
 
     // overide these
