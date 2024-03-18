@@ -1,20 +1,38 @@
 package CALab;
 
+import java.awt.*;
 import java.util.*;
 import java.io.*;
 import mvc.*;
 
-abstract class Cell extends Publisher implements Serializable {
+public abstract class Cell extends Publisher implements Serializable {
 
     protected int row = 0, col = 0;
     protected Set<Cell> neighbors = new HashSet<Cell>();
     protected Grid myGrid = null;
     protected Cell partner = null;
 
+    protected Color color = null;
+
+    protected String status = null;
+
 
     // choose a random neighbor as a partner
     public void choosePartner() {
         if (partner == null && neighbors != null) {
+            Cell[] localNeighbors = new Cell[neighbors.size()];
+            localNeighbors = neighbors.toArray(localNeighbors);
+            boolean picked = false;
+            while (!picked) {
+                Random rand = new Random();
+                int random = rand.nextInt(localNeighbors.length);
+                if (localNeighbors[random].partner == null) {
+                    this.partner = localNeighbors[random];
+                    this.partner.partner = this;
+                    picked = true;
+                }
+
+            }
 			/*
 			Set partner to null
 			Convert neighbors set to a local array
@@ -62,4 +80,6 @@ abstract class Cell extends Publisher implements Serializable {
     public abstract void reset(boolean randomly);
     // Set status of the cell
     public abstract void setStatus(int status);
+    public abstract Color getColor();
+    public abstract int getStatus();
 }

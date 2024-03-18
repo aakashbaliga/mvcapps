@@ -10,6 +10,6 @@ public class ClearCommand extends Command {
         }
 
         public void execute() {
-            myGrid.clear();
+            myGrid.repopulate(false);
         }
 }
