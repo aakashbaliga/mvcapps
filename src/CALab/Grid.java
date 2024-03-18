@@ -82,15 +82,36 @@ public abstract class Grid extends Model {
     // cell phases:
 
     public void observe() {
+        //Aakash Baliga
         // call each cell's observe method and notify subscribers
+        for (int row = 0; row < dim; row++) {
+            for (int col = 0; col < dim; col++) {
+                cells[row][col].observe();
+            }
+        }
+        notifySubscribers();
     }
 
     public void interact() {
-        // ???
+        //Aakash Baliga
+        // Calls interact method for each cell
+        for (int row = 0; row < dim; row++) {
+            for (int col = 0; col < dim; col++) {
+                cells[row][col].interact();
+            }
+        }
+        notifySubscribers();
     }
 
     public void update() {
-        // ???
+        //Aakash Baliga
+        //Calls update method for each cell
+        for (int row = 0; row < dim; row++) {
+            for (int col = 0; col < dim; col++) {
+                cells[row][col].update();
+            }
+        }
+        notifySubscribers();
     }
 
     public void updateLoop(int cycles) {
@@ -103,4 +124,6 @@ public abstract class Grid extends Model {
             System.out.println("time = " + time);
         }
     }
+
+
 }

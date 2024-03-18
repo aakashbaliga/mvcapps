@@ -1,4 +1,5 @@
 package life;
+import CALab.*;
 
-public class LifeFactory {
+public class LifeFactory extends GridFactory {
 }

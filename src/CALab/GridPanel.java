@@ -1,4 +1,16 @@
 package CALab;
+import mvc.*;
 
-public class GridPanel {
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
+
+
+public class GridPanel extends AppPanel implements ActionListener {
+
+    public GridPanel(AppFactory factory) {
+        super(factory);
+
+    }
+
 }
