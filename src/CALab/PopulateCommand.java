@@ -3,6 +3,7 @@ package CALab;
 import mvc.Command;
 import mvc.Model;
 
+// Anson Lau
 public class PopulateCommand extends Command {
 
     public PopulateCommand(Model model) {
@@ -11,8 +12,8 @@ public class PopulateCommand extends Command {
 
     @Override
     public void execute() {
-        if (model instanceof Grid) {
-            Grid grid = (Grid) model;
+        if (myModel instanceof Grid) {
+            Grid grid = (Grid) myModel;
             grid.repopulate(true); // Repopulate the grid with random values
         }
     }
