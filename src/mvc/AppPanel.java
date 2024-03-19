@@ -76,7 +76,6 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
             } else if (cmmd.equals("New")) {
                 Utilities.saveChanges(model);
                 setModel(factory.makeModel());
-
                 model.setUnsavedChanges(false);
             } else if (cmmd.equals("Quit")) {
                 Utilities.saveChanges(model);

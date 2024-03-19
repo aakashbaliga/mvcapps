@@ -1,9 +1,9 @@
 package life;
 import CALab.*;
-import mvc.AppFactory;
+import mvc.*;
 
 public class LifePanel extends GridPanel {
-    public LifePanel(AppFactory factory) {
+    public LifePanel(GridFactory factory) {
         super(factory);
     }
 }

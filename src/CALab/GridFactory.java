@@ -1,39 +1,59 @@
 package CALab;
 import mvc.*;
 
-public class GridFactory implements AppFactory {
+import javax.swing.*;
+import java.io.*;
+
+public abstract class GridFactory implements AppFactory {
     @Override
-    public Model makeModel() {
-        return new Model();
-    }
+    public abstract Grid makeModel();
 
     @Override
-    public GridView makeView(Model m) {
+    public View makeView(Model m) {
         return new GridView(m);
     }
 
     @Override
     public String[] getEditCommands() {
-        return new String[0];
+        return new String[]{
+                "RUN1",
+                "RUN50",
+                "POPULATE",
+                "CLEAR"
+        };
     }
 
     @Override
     public Command makeEditCommand(Model model, String type, Object source) {
-        return null;
+            switch (type) {
+                case "RUN1": {
+                    return new RunCommand((Grid)model, 1);
+                }
+                case "RUN50": {
+                    return new RunCommand((Grid)model, 50);
+                }
+                case "POPULATE": {
+                    return new PopulateCommand(model);
+                }
+                case "CLEAR": {
+                    return new ClearCommand((Grid)model);
+                }
+
+            }
+            return null;
+
     }
 
     @Override
     public String getTitle() {
-        return null;
+        return "CALab";
     }
 
     @Override
-    public String[] getHelp() {
-        return new String[0];
-    }
+    public abstract String[] getHelp();
 
     @Override
     public String about() {
-        return null;
+        return "CALab. Aakash Baliga, Anson Lau, Arav Panchmatia, 2024";
     }
 }

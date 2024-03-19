@@ -10,7 +10,6 @@ public class GridPanel extends AppPanel implements ActionListener {
 
     public GridPanel(AppFactory factory) {
         super(factory);
-
+        view = new GridView(model);
     }
-
 }
