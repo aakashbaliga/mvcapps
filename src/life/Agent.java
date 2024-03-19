@@ -16,7 +16,6 @@ public class Agent extends Cell {
                 ambience++;
             }
         }
-        setStatus(status); // Update status based on ambience
     }
 
     @Override
@@ -26,7 +25,9 @@ public class Agent extends Cell {
 
     @Override
     public void update() {
-
+        for (Cell neighbor : neighbors) {
+            setStatus(status); // Update status based on ambience
+        }
     }
 
     @Override
