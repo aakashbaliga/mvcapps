@@ -20,7 +20,7 @@ public class CellView extends JButton implements ActionListener, Subscriber {
     @Override
     public void actionPerformed(ActionEvent e) {
         myCell.nextState();
-        this.update();
+        this.update(); // Arav Panchmatia 
     }
 
     // called by notifySubscribers and GridView.update
