@@ -1,10 +1,13 @@
 package life;
 import CALab.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Society extends Grid {
-    int percentAlive = 50;
-    int rebirth;
-    int death;
+    public static Set<Integer> rebirth = new HashSet<Integer>();
+    public static Set<Integer> death = new HashSet<Integer>();
+    public static int percentAlive = 50;
 
     @Override
     public Agent makeCell(boolean uniform) {
