@@ -1,7 +1,5 @@
 package CALab;
 
-import mvc.Subscriber;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
