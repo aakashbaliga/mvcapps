@@ -1,5 +1,7 @@
 package CALab;
 
+import mvc.Subscriber;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -21,6 +23,7 @@ public class CellView extends JButton implements ActionListener, Subscriber {
     public void actionPerformed(ActionEvent e) {
         myCell.nextState();
         // call update needed?
+        this.update();
     }
 
     // called by notifySubscribers and GridView.update
