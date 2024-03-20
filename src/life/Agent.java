@@ -31,9 +31,19 @@ public class Agent extends Cell {
         }
     }
 
+    // Arav Panchmatia 
     @Override
     public void nextState() {
-
+        if (status == 0) {
+            if (ambience == 3) {
+                status = 1; // Dead cell comes back to life if it has 3 living neighbors
+            }
+        }
+        else {
+            if (ambience < 2 || ambience > 3) {
+                status = 0; // Living cell dies if it has too few or too many living neighbors
+            }
+        }
     }
 
     // Anson Lau
