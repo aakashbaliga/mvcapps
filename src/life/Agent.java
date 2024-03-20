@@ -53,7 +53,12 @@ public class Agent extends Cell {
 
     @Override
     public Color getColor() {
-        return null;
+        if (status == 1) {
+            return Color.GREEN; // Alive
+        }
+        else {
+            return Color.RED; // Dead
+        }
     }
 
     @Override
