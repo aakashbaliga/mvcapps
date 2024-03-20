@@ -57,9 +57,15 @@ public class Agent extends Cell {
         ambience = 0; // Reset ambience count
     }
 
+    // Arav Panchmatia
     @Override
     public void setStatus(int status) {
-
+        if (status == 0 || status == 1) {
+            this.status = status;
+        }
+        else {
+            throw new IllegalArgumentException("Status must be 0 (dead) or 1 (alive)");
+        }
     }
 
     // Arav Panchmatia
