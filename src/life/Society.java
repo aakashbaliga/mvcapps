@@ -11,6 +11,10 @@ public class Society extends Grid {
 
     @Override
     public Agent makeCell(boolean uniform) {
+        if (uniform) {
+            Agent agent = new Agent();
+            return agent;
+        }
         return null;
     }
 }
