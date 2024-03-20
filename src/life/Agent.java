@@ -1,4 +1,4 @@
-package life;
+ package life;
 import CALab.*;
 
 import java.awt.*;
@@ -23,6 +23,7 @@ public class Agent extends Cell {
 
     }
 
+    // Arav Panchmatia
     @Override
     public void update() {
         for (Cell neighbor : neighbors) {
@@ -51,6 +52,7 @@ public class Agent extends Cell {
 
     }
 
+    // Arav Panchmatia
     @Override
     public Color getColor() {
         if (status == 1) {
