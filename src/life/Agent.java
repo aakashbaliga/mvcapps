@@ -26,39 +26,23 @@ public class Agent extends Cell {
     // Arav Panchmatia
     @Override
     public void update() {
-        if (status == 0) {
-            if (ambience != 2 && ambience != 3) {
-                status = 0;
-            } else {
-                status = 1;
-            }
-        } else if (ambience >= 2 && ambience <= 3) {
-            status = 1;
-        } else {
-            status = 0;
+        if (status == 0 && ambience == 3) {
+            status = 1; // Cell becomes alive if it has exactly 3 neighbors
+        } else if (status == 1 && (ambience < 2 || ambience > 3)) {
+            status = 0; // Cell dies if it has fewer than 2 neighbors or more than 3 neighbors
         }
-
     }
 
     // Arav Panchmatia 
     @Override
     public void nextState() {
-        if (status == 0) {
-            status = 1;
-        }
-        else {
-            status = 0;
-        }
+        status = (status == 1) ? 0 : 1;
     }
 
     // Anson Lau
     @Override
     public void reset(boolean randomly) {
-        if (randomly) {
-            status = Math.random() < 0.5 ? 0 : 1; // Randomly assign status
-        } else {
-            status = 0; // Clear the cell by default
-        }
+        status = (randomly && Math.random() < 0.5) ? 1 : 0;
     }
 
 
@@ -66,16 +50,11 @@ public class Agent extends Cell {
     // Arav Panchmatia
     @Override
     public Color getColor() {
-        if (status == 1) {
-            return Color.GREEN; // Alive
-        }
-        else {
-            return Color.RED; // Dead
-        }
+        return (status == 1) ? Color.GREEN : Color.RED;
     }
 
     @Override
     public int getStatus() {
-        return ambience;
+        return status;
     }
 }
