@@ -10,11 +10,11 @@ public class GridView  extends View {
     private CellView cellViews[][];
     public static int dim = 20;
 
-    public GridView(Model model) {
+    public GridView(Grid grid) {
         cellViews = new CellView[dim][dim];
         for (int row = 0; row < cellViews.length; row ++) {
             for (int col = 0; col < cellViews[0].length; col ++) {
-                cellViews[row][col] = new CellView(((Grid) model).getCell(row, col));
+                cellViews[row][col] = new CellView(grid.getCell(row, col));
             }
         }
     }

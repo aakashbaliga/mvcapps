@@ -2,11 +2,17 @@ package life;
 import CALab.*;
 import mvc.Command;
 import mvc.Model;
+import mvc.View;
 
 public class LifeFactory extends GridFactory {
     @Override
-    public Grid makeModel() {
+    public Society makeModel() {
         return new Society();
+    }
+
+    @Override
+    public View makeView(Model m) {
+        return new GridView((Grid) m);
     }
 
     @Override

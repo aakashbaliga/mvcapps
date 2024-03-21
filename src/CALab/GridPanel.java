@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 
 public class GridPanel extends AppPanel implements ActionListener {
 
-    public GridPanel(AppFactory factory) {
+    public GridPanel(GridFactory factory) {
         super(factory);
-        view = new GridView(model);
+
     }
 }
