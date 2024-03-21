@@ -26,8 +26,21 @@ public class Agent extends Cell {
     // Arav Panchmatia
     @Override
     public void update() {
-        for (Cell neighbor : neighbors) {
-            setStatus(status); // Update status based on ambience
+        if (status == 0) {
+            if (ambience == 2 || ambience == 3) {
+                status = 1;
+            }
+            else {
+                status = 0;
+            }
+        }
+        else {
+            if (ambience < 2 || ambience > 3) {
+                status = 0;
+            }
+            else {
+                status = 1;
+            }
         }
     }
 
@@ -81,6 +94,6 @@ public class Agent extends Cell {
 
     @Override
     public int getStatus() {
-        return status;
+        return ambience;
     }
 }

@@ -20,7 +20,6 @@ public class GridView  extends View {
             for (int col = 0; col < grid.dim; col++) {
                 cellViews[row][col] = new CellView(grid.getCell(row, col));
                 setLayout(new GridLayout(((Grid) model).getDim(), ((Grid) model).getDim()));
-                cellViews[row][col].addActionListener(new CellClickListener());
                 cellViews[row][col].update();
                 add(cellViews[row][col]); // Add CellView to the GridView
             }
@@ -49,20 +48,10 @@ public class GridView  extends View {
         setCellViews();
     }
 
-    // Anson Lau
-    private class CellClickListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            CellView clickedCell = (CellView) e.getSource(); // Get the clicked CellView
-            clickedCell.getMyCell().nextState(); // Update the state of the clicked cell
-            clickedCell.update(); // Update the UI of the clicked cell
-        }
-    }
-
-    public void update(String msg, Object oldState, Object newState) {
+    public void update() {
         for (int row = 0; row < cellViews.length; row ++) {
             for (int col = 0; col < cellViews[row].length; col ++) {
-                cellViews[row][col].update(msg, oldState, newState);
+                cellViews[row][col].update();
             }
         }
     }

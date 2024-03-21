@@ -14,6 +14,9 @@ public abstract class Grid extends Model {
     public int getDim() { return dim; }
     public int getTime() { return time; }
     public Cell getCell(int row, int col) { return cells[row][col]; }
+    public void setCells(int row, int col, Cell val){
+        cells[row][col] = val;
+    }
     public abstract Cell makeCell(boolean uniform);
 
 
@@ -51,7 +54,9 @@ public abstract class Grid extends Model {
                 }
             }
         }
+        observe();
         notifySubscribers(); // notify subscribers
+        time = 0;
     }
 
     // Anson Lau

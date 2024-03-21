@@ -11,13 +11,23 @@ public class CellView extends JButton implements ActionListener, Subscriber {
 
     public CellView(Cell c) {
         myCell = c;
-        if (c != null) { c.subscribe(this); }
+        if (c != null) {
+            c.subscribe(this);
+        }
         this.addActionListener(this);
-        setPreferredSize(new Dimension(50, 50));
         update();
     }
 
     public Cell getMyCell() { return myCell; }
+
+    public Color getColor() {
+        if (myCell.getStatus() == 1) {
+            return Color.GREEN;
+        }
+        else {
+            return Color.RED;
+        }
+    }
 
     public CellView() { this(null); }
 
@@ -35,10 +45,5 @@ public class CellView extends JButton implements ActionListener, Subscriber {
         setBackground(myCell.getColor());
         setBorder(BorderFactory.createLineBorder(Color.black));
         setText("" + myCell.getStatus());
-    }
-
-    @Override
-    public void update() {
-
     }
 }
