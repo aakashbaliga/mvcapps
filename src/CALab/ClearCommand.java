@@ -4,12 +4,13 @@ package CALab;
 import mvc.*;
 
 public class ClearCommand extends Command {
-        Grid myGrid;
-        public ClearCommand(Grid grid) {
-            myGrid = grid;
+        public ClearCommand(Model model) {
+
+            super(model);
         }
 
         public void execute() {
+            Grid myGrid = (Grid)myModel;
             myGrid.repopulate(false);
         }
 }

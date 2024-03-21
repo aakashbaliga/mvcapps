@@ -10,11 +10,5 @@ public abstract class Command {
         myModel = model;
     }
 
-    protected Command() {
-
-    }
-
-    public void execute() {
-
-    }
+    public abstract void execute();
 }

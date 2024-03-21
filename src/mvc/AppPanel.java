@@ -17,17 +17,21 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
     public AppPanel(AppFactory factory) {
 
         // initialize fields here
-        model = new Model();
         this.factory = factory;
-        view = new View();
+        model = factory.makeModel();
+        view = factory.makeView(model);
+        view.setBackground(Color.LIGHT_GRAY);
         controlPanel = new JPanel();
+        controlPanel.setBackground(Color.DARK_GRAY);
+        setLayout(new GridLayout(1, 2));
         add(controlPanel);
+        add(view);
+        model.subscribe(this);
 
         frame = new SafeFrame();
         Container cp = frame.getContentPane();
         cp.add(this);
         frame.setJMenuBar(createMenuBar());
-        frame.setTitle(factory.getTitle());
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
     }
 
@@ -89,6 +93,10 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
                 Utilities.inform(factory.about());
             } else if (cmmd.equals("Help")) {
                 Utilities.inform(factory.getHelp());
+            }
+            else {
+                Command c = factory.makeEditCommand(model, cmmd, ae.getSource());
+                c.execute();
             }
         } catch (Exception e) {
             handleException(e);

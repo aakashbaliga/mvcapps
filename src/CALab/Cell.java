@@ -78,8 +78,6 @@ public abstract class Cell extends Publisher implements Serializable {
     public abstract void nextState();
     // set status to a random or initial value
     public abstract void reset(boolean randomly);
-    // Set status of the cell
-    public abstract void setStatus(int status);
     public abstract Color getColor();
     public abstract int getStatus();
 }

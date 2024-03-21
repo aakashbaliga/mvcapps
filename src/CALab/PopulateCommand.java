@@ -12,9 +12,7 @@ public class PopulateCommand extends Command {
 
     @Override
     public void execute() {
-        if (myModel instanceof Grid) {
-            Grid grid = (Grid) myModel;
-            grid.repopulate(true); // Repopulate the grid with random values
-        }
+        Grid grid = (Grid)myModel;
+        grid.repopulate(true);
     }
 }

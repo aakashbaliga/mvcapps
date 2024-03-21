@@ -11,11 +11,6 @@ public class LifeFactory extends GridFactory {
     }
 
     @Override
-    public View makeView(Model m) {
-        return new GridView((Grid) m);
-    }
-
-    @Override
     public String[] getHelp() {
         return new String[]{
                 "RUN1: Runs 1 cell",
@@ -23,5 +18,9 @@ public class LifeFactory extends GridFactory {
                 "POPULATE: Randomly sets a value for each cell",
                 "CLEAR: Resets each cell to dead."
         };
+    }
+
+    public static void main(String[] args) {
+        new LifeFactory();
     }
 }
