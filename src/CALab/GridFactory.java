@@ -25,14 +25,17 @@ public abstract class GridFactory implements AppFactory {
 
     @Override
     public Command makeEditCommand(Model model, String type, Object source) {
-        return switch (type) {
-            case "RUN1" -> new RunCommand((Grid) model, 1);
-            case "RUN50" -> new RunCommand((Grid) model, 50);
-            case "POPULATE" -> new PopulateCommand(model);
-            case "CLEAR" -> new ClearCommand((Grid) model);
-            default -> null;
-        };
-
+        if ("RUN1".equals(type)) {
+            return new RunCommand((Grid) model, 1);
+        } else if ("RUN50".equals(type)) {
+            return new RunCommand((Grid) model, 50);
+        } else if ("POPULATE".equals(type)) {
+            return new PopulateCommand(model);
+        } else if ("CLEAR".equals(type)) {
+            return new ClearCommand((Grid) model);
+        } else {
+            return null;
+        }
     }
 
     @Override

@@ -6,11 +6,13 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class LifePanel extends GridPanel {
+
     public LifePanel(LifeFactory factory) {
         super(factory);
 
         Society society = new Society();
         view = new GridView(society);
+        add(view);
 
         JButton run1 = new JButton("RUN1");
         JButton run50 = new JButton("RUN50");
@@ -32,8 +34,6 @@ public class LifePanel extends GridPanel {
         add(populate);
         add(clear);
     }
-
-
 
     public static void main(String[] args) {
         LifeFactory f = new LifeFactory();
