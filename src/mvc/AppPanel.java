@@ -14,21 +14,25 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
     public static int FRAME_WIDTH = 800;
     public static int FRAME_HEIGHT = 500;
 
+    // Anson Lau
     public AppPanel(AppFactory factory) {
 
         // initialize fields here
-        model = new Model();
         this.factory = factory;
-        view = new View();
+        model = factory.makeModel();
+        view = factory.makeView(model);
+        view.setBackground((Color.GRAY));
         controlPanel = new JPanel();
+        setLayout(new GridLayout(1,2));
         add(controlPanel);
+        add(view);
+        model.subscribe(this);
 
         frame = new SafeFrame();
         Container cp = frame.getContentPane();
         cp.add(this);
-        frame.setJMenuBar(createMenuBar());
-        frame.setTitle(factory.getTitle());
-        frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        frame.setJMenuBar(this.createMenuBar());
+        frame.setSize(500, 300);
     }
 
     public void display() { frame.setVisible(true); }
