@@ -20,7 +20,6 @@ public abstract class Cell extends Publisher implements Serializable {
     // choose a random neighbor as a partner
     public void choosePartner() {
         if (partner == null && neighbors != null) {
-            partner = null;
             Cell[] localNeighbors = new Cell[neighbors.size()];
             localNeighbors = neighbors.toArray(localNeighbors);
             boolean picked = false;
@@ -53,8 +52,6 @@ public abstract class Cell extends Publisher implements Serializable {
         }
     }
 
-
-
     // Anson Lau
     // Set neighbors of the cell
     public void setNeighbors(Set<Cell> neighbors) {
@@ -81,15 +78,6 @@ public abstract class Cell extends Publisher implements Serializable {
     public abstract void nextState();
     // set status to a random or initial value
     public abstract void reset(boolean randomly);
-    // Set status of the cell
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    public void setColor(Color color) {
-        this.color = color;
-    }
-    public Color getColor() {
-        return color;
-    }
+    public abstract Color getColor();
     public abstract int getStatus();
 }

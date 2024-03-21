@@ -5,13 +5,6 @@ import javax.swing.*;
 import java.io.*;
 
 public abstract class GridFactory implements AppFactory {
-    @Override
-    public abstract Grid makeModel();
-
-
-    public GridView makeView(Grid g) {
-        return new GridView(g);
-    }
 
     @Override
     public String[] getEditCommands() {
@@ -26,13 +19,13 @@ public abstract class GridFactory implements AppFactory {
     @Override
     public Command makeEditCommand(Model model, String type, Object source) {
         if ("RUN1".equals(type)) {
-            return new RunCommand((Grid) model, 1);
+            return new RunCommand(model, 1);
         } else if ("RUN50".equals(type)) {
-            return new RunCommand((Grid) model, 50);
+            return new RunCommand(model, 50);
         } else if ("POPULATE".equals(type)) {
             return new PopulateCommand(model);
         } else if ("CLEAR".equals(type)) {
-            return new ClearCommand((Grid) model);
+            return new ClearCommand(model);
         } else {
             return null;
         }
@@ -49,5 +42,9 @@ public abstract class GridFactory implements AppFactory {
     @Override
     public String about() {
         return "CALab. Aakash Baliga, Anson Lau, Arav Panchmatia, 2024";
+    }
+
+    public View makeView(Model m) {
+        return new GridView((Grid)m);
     }
 }

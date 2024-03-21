@@ -14,16 +14,16 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
     public static int FRAME_WIDTH = 800;
     public static int FRAME_HEIGHT = 500;
 
-    // Anson Lau
     public AppPanel(AppFactory factory) {
 
         // initialize fields here
         this.factory = factory;
         model = factory.makeModel();
         view = factory.makeView(model);
-        view.setBackground((Color.GRAY));
+        view.setBackground(Color.LIGHT_GRAY);
         controlPanel = new JPanel();
-        setLayout(new GridLayout(1,2));
+        controlPanel.setBackground(Color.DARK_GRAY);
+        setLayout(new GridLayout(1, 2));
         add(controlPanel);
         add(view);
         model.subscribe(this);
@@ -31,8 +31,8 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
         frame = new SafeFrame();
         Container cp = frame.getContentPane();
         cp.add(this);
-        frame.setJMenuBar(this.createMenuBar());
-        frame.setSize(900, 500);
+        frame.setJMenuBar(createMenuBar());
+        frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
     }
 
     public void display() { frame.setVisible(true); }
@@ -93,6 +93,10 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener  {
                 Utilities.inform(factory.about());
             } else if (cmmd.equals("Help")) {
                 Utilities.inform(factory.getHelp());
+            }
+            else {
+                Command c = factory.makeEditCommand(model, cmmd, ae.getSource());
+                c.execute();
             }
         } catch (Exception e) {
             handleException(e);

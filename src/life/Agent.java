@@ -27,35 +27,27 @@ public class Agent extends Cell {
     @Override
     public void update() {
         if (status == 0) {
-            if (ambience == 2 || ambience == 3) {
+            if (ambience != 2 && ambience != 3) {
+                status = 0;
+            } else {
                 status = 1;
             }
-            else {
-                status = 0;
-            }
+        } else if (ambience >= 2 && ambience <= 3) {
+            status = 1;
+        } else {
+            status = 0;
         }
-        else {
-            if (ambience < 2 || ambience > 3) {
-                status = 0;
-            }
-            else {
-                status = 1;
-            }
-        }
+
     }
 
     // Arav Panchmatia 
     @Override
     public void nextState() {
         if (status == 0) {
-            if (ambience == 3) {
-                status = 1; // Dead cell comes back to life if it has 3 living neighbors
-            }
+            status = 1;
         }
         else {
-            if (ambience < 2 || ambience > 3) {
-                status = 0; // Living cell dies if it has too few or too many living neighbors
-            }
+            status = 0;
         }
     }
 
@@ -67,19 +59,9 @@ public class Agent extends Cell {
         } else {
             status = 0; // Clear the cell by default
         }
-        ambience = 0; // Reset ambience count
     }
 
-    // Arav Panchmatia
-    @Override
-    public void setStatus(int status) {
-        if (status == 0 || status == 1) {
-            this.status = status;
-        }
-        else {
-            throw new IllegalArgumentException("Status must be 0 (dead) or 1 (alive)");
-        }
-    }
+
 
     // Arav Panchmatia
     @Override

@@ -48,9 +48,9 @@ public abstract class Grid extends Model {
         for (int row = 0; row < dim; row++) {
             for (int col = 0; col < dim; col++) {
                 if (randomly) {
-                    cells[row][col].setStatus(Math.random() < 0.5 ? 0 : 1); // Randomly set the status of each cell
+                    cells[row][col].reset(true); // Randomly set the status of each cell
                 } else {
-                    cells[row][col].setStatus(0); // Set the status of each cell to 0 (dead)
+                    cells[row][col].reset(false); // Set the status of each cell to 0 (dead)
                 }
             }
         }
@@ -92,9 +92,10 @@ public abstract class Grid extends Model {
         for (int row = 0; row < dim; row++) {
             for (int col = 0; col < dim; col++) {
                 cells[row][col].observe();
+                notifySubscribers();
             }
         }
-        notifySubscribers();
+
     }
 
     public void interact() {
@@ -105,7 +106,7 @@ public abstract class Grid extends Model {
                 cells[row][col].interact();
             }
         }
-        notifySubscribers();
+
     }
 
     public void update() {

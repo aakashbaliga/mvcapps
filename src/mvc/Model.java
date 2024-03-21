@@ -19,7 +19,9 @@ public class Model extends Publisher {
     }
 
     public void changed() {
+
         unsavedChanges = true;
+        notifySubscribers();
     }
 
     public void setUnsavedChanges(boolean b) {

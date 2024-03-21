@@ -9,9 +9,11 @@ public class Society extends Grid {
     public static Set<Integer> death = new HashSet<Integer>();
     public static int percentAlive = 50;
 
-    public Agent makeCell(boolean uniform){
+    @Override
+    public Agent makeCell(boolean uniform) {
         return new Agent();
     }
+
     static {
         rebirth.add(3);
         death.add(0);
