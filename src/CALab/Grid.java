@@ -31,13 +31,16 @@ public abstract class Grid extends Model {
     protected void populate() {
         for (int row = 0; row < dim; row++) {
             for (int col = 0; col < dim; col++) {
-                cells[row][col] = makeCell(true); // Use makeCell to fill in cells
+                Cell cell = makeCell(true);
+                cell.row = row;
+                cell.col = col;
+                cells[row][col] = cell;
             }
         }
-        for (int row = 0; row < dim; row++) {
-            for (int col = 0; col < dim; col++) {
-                cells[row][col].setNeighbors(getNeighbors(cells[row][col], 1));
-                // Use getNeighbors to set the neighbors field of each cell
+
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                cell.neighbors = getNeighbors(cell, 1);
             }
         }
     }
@@ -45,13 +48,9 @@ public abstract class Grid extends Model {
     // Anson Lau
     // called when Populate button is clicked
     public void repopulate(boolean randomly) {
-        for (int row = 0; row < dim; row++) {
-            for (int col = 0; col < dim; col++) {
-                if (randomly) {
-                    cells[row][col].reset(true); // Randomly set the status of each cell
-                } else {
-                    cells[row][col].reset(false); // Set the status of each cell to 0 (dead)
-                }
+        for(int i = 0; i< cells.length; i++){
+            for(int j=0; j < cells[i].length; j++){
+                cells[i][j].reset(randomly); // Reset cell status based on randomly parameter
             }
         }
         observe();
@@ -70,13 +69,21 @@ public abstract class Grid extends Model {
 
         Set<Cell> neighbors = new HashSet<>();
 
-        for (int row = Math.max(0, asker.getRow() - radius); row <= Math.min(dim - 1, asker.getRow() + radius); row++) {
-            for (int col = Math.max(0, asker.getCol() - radius); col <= Math.min(dim - 1, asker.getCol() + radius); col++) {
-                if (!(row == asker.getRow() && col == asker.getCol())) {
-                    neighbors.add(cells[row][col]);
+        int currRow = (asker.row - radius + dim) % dim;
+        int startCol = (asker.col - radius + dim) % dim;
+        int currCol = startCol;
+
+        while (currRow != (asker.row + radius + 1) % dim) {
+            while (currCol != (asker.col + radius + 1) % dim) {
+                if (currRow != asker.row || currCol != asker.col) {
+                    neighbors.add(cells[currRow][currCol]);
                 }
+                currCol = (currCol + 1) % dim;
             }
+            currCol = startCol;
+            currRow = (currRow + 1) % dim;
         }
+
         return neighbors;
     }
 
@@ -89,32 +96,31 @@ public abstract class Grid extends Model {
     public void observe() {
         //Aakash Baliga
         // call each cell's observe method and notify subscribers
-        for (int row = 0; row < dim; row++) {
-            for (int col = 0; col < dim; col++) {
-                cells[row][col].observe();
-                notifySubscribers();
+        for (int row = 0; row < cells.length; row++) {
+            for (int col = 0; col < cells.length; col++) {
+                (getCell(row,col)).observe();
             }
         }
-
+        notifySubscribers();
     }
 
     public void interact() {
         //Aakash Baliga
         // Calls interact method for each cell
-        for (int row = 0; row < dim; row++) {
-            for (int col = 0; col < dim; col++) {
-                cells[row][col].interact();
+        for (int row = 0; row < cells.length; row++) {
+            for (int col = 0; col < cells.length; col++) {
+                (getCell(row,col)).interact();
             }
         }
-
+        notifySubscribers();
     }
 
     public void update() {
         //Aakash Baliga
         //Calls update method for each cell
-        for (int row = 0; row < dim; row++) {
-            for (int col = 0; col < dim; col++) {
-                cells[row][col].update();
+        for (int row = 0; row < cells.length; row++) {
+            for (int col = 0; col < cells.length; col++) {
+                (getCell(row,col)).update();
             }
         }
         notifySubscribers();
@@ -128,6 +134,7 @@ public abstract class Grid extends Model {
             observe();
             time++;
             System.out.println("time = " + time);
+            notifySubscribers();
         }
     }
 
