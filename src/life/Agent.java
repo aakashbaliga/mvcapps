@@ -26,6 +26,13 @@ public class Agent extends Cell {
     // Arav Panchmatia
     @Override
     public void update() {
+        ambience = 0; // Reset ambience count
+        for (Cell neighbor : neighbors) {
+            if (neighbor.getStatus() == 1) {
+                ambience++;
+            }
+        }
+
         if (status == 0 && ambience == 3) {
             status = 1; // Cell becomes alive if it has exactly 3 neighbors
         } else if (status == 1 && (ambience < 2 || ambience > 3)) {
@@ -45,7 +52,10 @@ public class Agent extends Cell {
         status = (randomly && Math.random() < 0.5) ? 1 : 0;
     }
 
-
+    @Override
+    public int getAmbience() {
+        return ambience;
+    }
 
     // Arav Panchmatia
     @Override
