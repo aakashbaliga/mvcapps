@@ -8,9 +8,9 @@ public abstract class GridFactory implements AppFactory {
     @Override
     public abstract Grid makeModel();
 
-    @Override
-    public View makeView(Model m) {
-        return new GridView(m);
+
+    public GridView makeView(Grid g) {
+        return new GridView(g);
     }
 
     @Override
@@ -25,22 +25,13 @@ public abstract class GridFactory implements AppFactory {
 
     @Override
     public Command makeEditCommand(Model model, String type, Object source) {
-            switch (type) {
-                case "RUN1": {
-                    return new RunCommand((Grid)model, 1);
-                }
-                case "RUN50": {
-                    return new RunCommand((Grid)model, 50);
-                }
-                case "POPULATE": {
-                    return new PopulateCommand(model);
-                }
-                case "CLEAR": {
-                    return new ClearCommand((Grid)model);
-                }
-
-            }
-            return null;
+        return switch (type) {
+            case "RUN1" -> new RunCommand((Grid) model, 1);
+            case "RUN50" -> new RunCommand((Grid) model, 50);
+            case "POPULATE" -> new PopulateCommand(model);
+            case "CLEAR" -> new ClearCommand((Grid) model);
+            default -> null;
+        };
 
     }
 
